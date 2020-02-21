@@ -1,29 +1,58 @@
 import React from 'react';
-import AddElements from './AddElements';
+import styled from 'styled-components'
+import AddAttributeElement from './AddAttributeElement';
 
+const TwoRowDiv = styled.div`
+    display: flex;
+    flex-direction: row;
+`
+const StyledTable = styled.table`
+    border-right: 2px solid #000;
+    margin: 0 10px 10px 0;
+`
 class SheetAttributes extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(name,value) {
+        this.props.onChange(name,value);
+    }
+
     render() {
-        let attributeList = [];
+        let mainAttributeList = [],
+            secondAttributeList = [];
         this.props.attributes.forEach(element => {
-            attributeList.push(
-                <AddElements
-                    element = {element}
-                    key = {element.name}
-                    onChange = {this.props.onAttributeChange}
-                />
-            );
+            if (mainAttributeList.length <= 3) { //Will probably rework two lists into one which switch column after the fourth.
+                mainAttributeList.push(
+                    <AddAttributeElement
+                        element = {element}
+                        key = {element.name}
+                        onChange = {this.handleChange}
+                    />
+                );
+            } else if (secondAttributeList.length <= 3) {
+                secondAttributeList.push(
+                    <AddAttributeElement
+                        element = {element}
+                        key = {element.name}
+                        onChange = {this.handleChange}
+                    />
+                );
+            }
         });
+
         return (
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Level</th>
-                        <th>Pts</th>
-                    </tr>
-                </thead>
-                <tbody>{attributeList}</tbody>
-            </table>
+            <TwoRowDiv>
+                <StyledTable>
+                    <tbody>{mainAttributeList}</tbody>
+                </StyledTable>
+                <StyledTable>
+                    <tbody>{secondAttributeList}</tbody>
+                </StyledTable>
+            </TwoRowDiv>
+
         );
     }
 }
