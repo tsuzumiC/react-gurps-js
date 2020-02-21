@@ -51,17 +51,19 @@ class SheetSkills extends React.Component {
                 });
             }
         return (
-            <TwoRowDiv>
-                <StyledTable>
-                    <tbody>{skillColunmOne}</tbody>
-                </StyledTable>
-                <StyledTable>
-                    <tbody>{skillColumnTwo}</tbody>
-                </StyledTable>
+            <div>
+                <TwoRowDiv>
+                    <StyledTable>
+                        <tbody>{skillColunmOne}</tbody>
+                    </StyledTable>
+                    <StyledTable>
+                        <tbody>{skillColumnTwo}</tbody>
+                    </StyledTable>
+                </TwoRowDiv>
                 <button onClick = {this.newSkill}>
                     NewSkill
                 </button>
-            </TwoRowDiv>
+            </div>
         );
     }
 }
