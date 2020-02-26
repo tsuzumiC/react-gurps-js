@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/react-gurps-js/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/react-gurps-js/static/js/main.c7bf134f.chunk.js",
-    "main.js.map": "/react-gurps-js/static/js/main.c7bf134f.chunk.js.map",
+    "main.js": "/react-gurps-js/static/js/main.8d053096.chunk.js",
+    "main.js.map": "/react-gurps-js/static/js/main.8d053096.chunk.js.map",
     "runtime-main.js": "/react-gurps-js/static/js/runtime-main.eb7edfdb.js",
     "runtime-main.js.map": "/react-gurps-js/static/js/runtime-main.eb7edfdb.js.map",
-    "static/js/2.8e24fd1c.chunk.js": "/react-gurps-js/static/js/2.8e24fd1c.chunk.js",
-    "static/js/2.8e24fd1c.chunk.js.map": "/react-gurps-js/static/js/2.8e24fd1c.chunk.js.map",
+    "static/js/2.7dba6264.chunk.js": "/react-gurps-js/static/js/2.7dba6264.chunk.js",
+    "static/js/2.7dba6264.chunk.js.map": "/react-gurps-js/static/js/2.7dba6264.chunk.js.map",
     "index.html": "/react-gurps-js/index.html",
-    "precache-manifest.6e2a8d5574b7b09fa1ab3a8f41781206.js": "/react-gurps-js/precache-manifest.6e2a8d5574b7b09fa1ab3a8f41781206.js",
+    "precache-manifest.2cb0835ab13dc36a7dab3a285504cfbb.js": "/react-gurps-js/precache-manifest.2cb0835ab13dc36a7dab3a285504cfbb.js",
     "service-worker.js": "/react-gurps-js/service-worker.js",
     "static/css/main.5ecd60fb.chunk.css.map": "/react-gurps-js/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.8e24fd1c.chunk.js.LICENSE.txt": "/react-gurps-js/static/js/2.8e24fd1c.chunk.js.LICENSE.txt"
+    "static/js/2.7dba6264.chunk.js.LICENSE.txt": "/react-gurps-js/static/js/2.7dba6264.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.eb7edfdb.js",
-    "static/js/2.8e24fd1c.chunk.js",
+    "static/js/2.7dba6264.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.c7bf134f.chunk.js"
+    "static/js/main.8d053096.chunk.js"
   ]
 }
