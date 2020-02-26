@@ -1,25 +1,42 @@
-import React from 'react';
+import React, {Component} from 'react';
 import styled from 'styled-components'
 import AddSkillElement from './AddSkillElement';
+import NewSkillPopUp from './NewSkillPopUp';
 
-const TwoRowDiv = styled.div`
-    display: flex;
-    flex-direction: row;
+const StyledDiv = styled.div`
+    border: 1px solid #888844;
+    margin-left: 5px
+`
+const StyledTBody = styled.tbody`
+    
+`
+const StyledTR = styled.tr`
+    display: grid;
+    grid-template: 1fr / 1fr 4rem 3rem 3rem;
+    background-color: #fff4aa;
+    border: 1px solid #2244ff
 `
 const StyledTable = styled.table`
-    border-right: 2px solid #000;
-    margin: 0 10px 10px 0;
+    width: 100%
 `
 
-class SheetSkills extends React.Component {
+export default class SheetSkills extends Component {
     constructor(props) {
         super(props);
-        this.newSkill = this.newSkill.bind(this);
+        this.makeNewSkill = this.makeNewSkill.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.addNewSkill = this.addNewSkill.bind(this);
+        this.bAddNewSkill = false;
     }
 
-    newSkill(name,type) {
-        this.props.newSkill(name,type);
+    makeNewSkill() {
+        this.bAddNewSkill = true;
+        this.forceUpdate();
+    }
+
+    addNewSkill(skill) {
+        this.props.onNewSkill(skill);
+        this.bAddNewSkill = false;
     }
 
     handleChange(name,value) {
@@ -27,45 +44,46 @@ class SheetSkills extends React.Component {
     }
         
     render() {
-        let skillColunmOne = [],
-            skillColumnTwo = [];
-            if (this.props.skills) { //If skills contain any enteries we add them the tables. Even left, odd right.
-                this.props.skills.forEach(element => {
-                    if ((skillColunmOne.length + skillColumnTwo.length) % 2 === 0) {
-                        skillColunmOne.push(
-                            <AddSkillElement
-                                element = {element}
-                                key = {element.name}
-                                onChange = {this.handleChange}
-                            />
-                        );
-                    } else {
-                        skillColumnTwo.push(
-                            <AddSkillElement
-                                element = {element}
-                                key = {element.name}
-                                onChange = {this.handleChange}
-                            />
-                        );
-                    }
-                });
-            }
+        let skillColunm = [];
+        if (this.props.skills) {
+            this.props.skills.forEach(element => {
+                skillColunm.push(
+                    <AddSkillElement
+                        element = {element}
+                        key = {element.name}
+                        onChange = {this.handleChange}
+                    />
+                );
+            });
+        }
+        if (this.bAddNewSkill) {
+            skillColunm.push(
+                <NewSkillPopUp
+                    skills = {this.props.skills}
+                    attributes = {this.props.attributes}
+                    onSubmit = {this.addNewSkill}
+                    />
+            );
+        }
         return (
-            <div>
-                <TwoRowDiv>
-                    <StyledTable>
-                        <tbody>{skillColunmOne}</tbody>
-                    </StyledTable>
-                    <StyledTable>
-                        <tbody>{skillColumnTwo}</tbody>
-                    </StyledTable>
-                </TwoRowDiv>
-                <button onClick = {this.newSkill}>
-                    NewSkill
+            <StyledDiv>
+                <StyledTable>
+                    <thead>
+                        <StyledTR>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Level</th>
+                            <th>Pts</th>
+                        </StyledTR>
+                    </thead>
+                    <StyledTBody>{skillColunm}</StyledTBody>
+                </StyledTable>
+                <button
+                    onClick = {this.makeNewSkill}
+                    disabled = {this.bAddNewSkill}>
+                        NewSkill
                 </button>
-            </div>
+            </StyledDiv>
         );
     }
 }
-
-export default SheetSkills;

@@ -1,14 +1,26 @@
-import React from 'react';
+import React, {Component} from 'react';
 import SheetAttributes from './SheetAttributes';
-import SheetSkills from './SheetSkills.js';
+import SheetSkills from './SheetSkills';
+import styled from 'styled-components';
 
-class Sheet extends React.Component {
+const SheetPage = styled.div`
+    display: grid;
+    grid-template: 100% / 50% 50%;
+    max-width: 1000px;
+    padding: 10px;
+    margin: 5px;
+    box-shadow: 1px 1px 5px 5px #00000022;
+    border: 1px solid #bbbbbb;
+    background-color: #ffffee;
+`
+
+export default class Sheet extends Component {
     constructor(props) {
         super(props);
         this.state = {
             attributes: [],
             skills: []
-        }; 
+        };
         this.attributeCosts = {ST: 10, DX: 20, IQ: 20, HT: 10, HP: 2, Will: 5, Per: 5, FP: 3};
         this.skillType = ['DX','IQ','HT','Per'];
         this.skillCost = {E: 0, A: -1, H: -2, VH: -3};
@@ -36,7 +48,6 @@ class Sheet extends React.Component {
     }
 
     handleAtrributeChange(name, level) {
-        // debugger;
         let tempArray = this.state.attributes.map(element => {
             if (element.name === name) {
                 let tempLevel = level ? level : 0;
@@ -51,22 +62,15 @@ class Sheet extends React.Component {
         this.setState({attributes: tempArray, skills: tempSkills});
     }
 
-    handleNewSkill(name, type) {
-        let tempArray = [...this.state.skills],
-            skillType = this.skillType[this.getRandomInt(0,3)],
-            skillCost = Object.entries(this.skillCost)[this.getRandomInt(0,3)];
-        tempArray.push({
-            name: `Skill ${tempArray.length}`,
-            type: skillType,
-            cost: skillCost,
-            level: this.calcSkillLevel(skillType, skillCost[1], 1),
-            pts: 1
+    handleNewSkill(skill) {
+        let tempArray = this.state.skills;
+        tempArray.push({...skill});
+        this.setState({
+            skills: tempArray
         });
-        this.setState({skills: tempArray});
     }
 
     handleSkillChange(name,pts) {
-        // debugger;
         let tempArray = this.state.skills.map(element => {
             if (element.name === name) {
                 return {
@@ -97,7 +101,6 @@ class Sheet extends React.Component {
     }
 
     calcSkillLevel(type, cost, pts, attributeArray = null) {
-        // debugger;
         let attributes = [];
         if (attributeArray){
             attributes = attributeArray;
@@ -120,19 +123,18 @@ class Sheet extends React.Component {
 
     render() {
         return (
-            <div>
+            <SheetPage>
                 <SheetAttributes 
                     attributes = {this.state.attributes}
                     onChange = {this.handleAtrributeChange}
                 />
                 <SheetSkills
                     skills = {this.state.skills}
-                    newSkill = {this.handleNewSkill}
+                    attributes = {this.state.attributes}
+                    onNewSkill = {this.handleNewSkill}
                     onChange = {this.handleSkillChange}
                 />
-            </div>
+            </SheetPage>
         );
     }
 }
-
-export default Sheet;
